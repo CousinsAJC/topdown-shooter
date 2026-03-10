@@ -11,9 +11,9 @@ function Player:new()
 
     --shooting
     self.bullets = {}
-    self.fireCooldown = .3
+    self.fireCooldown = .2
     self.fireTimer = 0
-    self.bulletSpeed = 450
+    self.bulletSpeed = 550
 
 end
 
@@ -53,7 +53,8 @@ function Player:checkForFire(dt)
 end
 
 function Player:fireNewBullet(dt)
-    if love.keyboard.isDown("space") then
+    if love.mouse.isDown(1) then
+    --if love.keyboard.isDown("space") then
         if self.fireTimer <= 0 then
             local mouseX, mouseY = love.mouse.getPosition()
             local angle = math.atan2(mouseY - self.y, mouseX - self.x)
