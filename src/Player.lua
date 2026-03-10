@@ -6,7 +6,7 @@ function Player:new()
     self.h = 20
     self.x = WINWIDTH/2 - self.w/2
     self.y = WINHEIGHT/2 - self.h/2
-    self.speed = .7
+    self.speed = 3
     self.pace = 1
 
     --shooting
