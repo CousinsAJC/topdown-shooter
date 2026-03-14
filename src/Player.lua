@@ -2,7 +2,7 @@ Player = Object:extend()
 
 function Player:new()
     --position, size, speed
-    
+
     self.shape = 'circle'  --options are circle and square
 
     if self.shape == 'circle' then
@@ -21,6 +21,7 @@ function Player:new()
     end
 
     self.health = 5
+    self.gold = 0
 
     --position
     self.originX = 0

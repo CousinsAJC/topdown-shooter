@@ -6,6 +6,8 @@ function Enemy:new(x, y, enemyType)
     self.xWorld = self.x
     self.yWorld = self.y
     self.r = 15
+    self.health = 5
+    self.dead = false
 
     self.minFollow = 150
     self.maxFollow = 200 
@@ -22,7 +24,9 @@ function Enemy:new(x, y, enemyType)
 end
 
 function Enemy:update(dt)
-    print("enemy X: " .. self.x .. " || enemy Y: " .. self.y)
+    --print("enemy X: " .. self.x .. " || enemy Y: " .. self.y)
+
+    self:checkForBullets(dt)
     --for each target:get distance (table of players?)
     self.xWorld, self.yWorld = CM.toWorldCoords(self.x, self.y)
     local distance = getDistance(self.xWorld, self.yWorld, p1.xWorld, p1.yWorld)
@@ -34,6 +38,33 @@ end
 function Enemy:draw()
     love.graphics.setColor(1,0,0,1)
     love.graphics.circle("fill", self.x, self.y, self.r)
+end
+
+
+
+
+
+
+function Enemy:checkForBullets(dt)
+    local bullets = p1.bullets
+    for i = #bullets, 1, -1 do
+        local distance = getDistance(self.xWorld, self.yWorld, bullets[i].x, bullets[i].y)
+        if distance <= (self.r + bullets[i].r) then
+            table.remove(p1.bullets, i)
+            self.health = self.health - 1
+            if self.health <= 0 then
+                self:dropGold()
+                self.dead = true
+            end
+        end
+    end
+end
+
+
+function Enemy:dropGold()
+    --create class for gold
+    local gold = Gold(self.x, self.y)
+    table.insert(collectibles, gold)
 end
 
 
@@ -87,9 +118,5 @@ end
 
 
 function Enemy:determineType(enemy)
-    if enemy == "dragon" then
-        
-    elseif enemy == "slime" then
 
-    end
 end

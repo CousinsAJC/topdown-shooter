@@ -10,6 +10,10 @@ function UserInterface:new()
     self.cooldownColor = color.green
     self.cooldownX = WINWIDTH - 100
     self.cooldownY = 20
+
+    self.goldColor = color.yellow
+    self.goldX = WINWIDTH - 300
+    self.goldY = 20
 end
 
 
@@ -21,6 +25,7 @@ end
 function UserInterface:draw()
     self:drawHealthBars()
     self:drawCoolDowns()
+    self:drawGoldCount()
 end
 
 
@@ -51,4 +56,10 @@ function UserInterface:drawCoolDowns()
     love.graphics.setNewFont(24)
     local number = string.format("%.2f", self.boostTimer)
     love.graphics.print(number, self.cooldownX, self.cooldownY)
+end
+
+function UserInterface:drawGoldCount()
+    love.graphics.setColor(self.goldColor)
+    love.graphics.setNewFont(24)
+    love.graphics.print(p1.gold, self.goldX, self.goldY)
 end

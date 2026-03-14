@@ -6,9 +6,10 @@ function Bullet:new(x, y, speed, dx, dy)
     self.speed = speed
     self.dx = dx
     self.dy = dy
-    self.radius = 5
+    self.r = 5
     self.camX = null
     self.camY = null
+    self.xWorld, self.yWorld = CM.toWorldCoords(self.x, self.y)
 end
 
 function Bullet:update(dt)
@@ -19,7 +20,7 @@ end
 
 function Bullet:draw()
     love.graphics.setColor(.4, .4, .4, 1)
-    love.graphics.circle("fill", self.camX, self.camY, self.radius)
+    love.graphics.circle("fill", self.camX, self.camY, self.r)
 end
 
 
