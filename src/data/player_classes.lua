@@ -31,7 +31,7 @@ p_type = {
         wis = 8,
         cha = 8,
 
-        health = 8
+        health = 8,
         texture = 'sorceror',
         animations = {
             ['idle'] = {
@@ -55,7 +55,7 @@ p_type = {
         wis = 8,
         cha = 8,
 
-        health = 12
+        health = 12,
         texture = 'soldier',
         animations = {
             ['idle'] = {

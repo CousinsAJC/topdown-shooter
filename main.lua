@@ -23,6 +23,8 @@ function love.load()
     e1 = Enemy(100, 100, 'dragon')
     
     CM = Camera.newManager()
+
+    myKeys = {}
 end
 
 
@@ -33,6 +35,8 @@ function love.update(dt)
 
     CM.setTarget(p1.centerX, p1.centerY)
     CM.update(dt)
+
+    myKeys = {}
 end
 
 
@@ -42,9 +46,10 @@ function love.draw()
     drawGrid()
     p1:draw()
     e1:draw()
-    UI:draw()
+    
 
     CM.detach()
+    UI:draw()
 end
 
 
@@ -56,7 +61,7 @@ function setGameTables()
 
     maxPlayers = 4
     players = {}
-    
+
     enemies = {}
 end
 

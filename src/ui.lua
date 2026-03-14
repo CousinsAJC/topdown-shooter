@@ -49,5 +49,6 @@ end
 function UserInterface:drawCoolDowns()
     love.graphics.setColor(self.cooldownColor)
     love.graphics.setNewFont(24)
-    love.graphics.print(self.boostTimer, self.cooldownX, self.cooldownY)
+    local number = string.format("%.2f", self.boostTimer)
+    love.graphics.print(number, self.cooldownX, self.cooldownY)
 end
