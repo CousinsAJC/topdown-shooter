@@ -11,45 +11,34 @@ function love.load()
     establishGrid()
     setGameTables()
 
-    UI = UserInterface()
-    p1 = Player()
-    table.insert(players, p1)
 
-    spawnTimer = 5
-    spawnTimeLeft = 0
+    -- Initialize state machine
+    gsm = StateMachine{
+        ['menu'] = function() return MenuState() end,
+        ['char'] = function() return CharState() end,
+        ['play'] = function() return PlayState() end,
+        ['options'] = function() return OptionsState() end, 
+        ['levelup'] = function() return LevelupState() end
+    }
 
-    CM = Camera.newManager()
+    -- Move to initial state
+    gsm:change('play', players)
 
     myKeys = {}
 end
 
 
 function love.update(dt)
-    updatePlayers(dt)
-    updateEnemies(dt)
-    updateCollectibles(dt)
+    gsm:update(dt)
 
-    spawnEnemy(dt)
-
-    UI:update(dt)
-
-    CM.setTarget(p1.centerX, p1.centerY)
-    CM.update(dt)
 
     myKeys = {}
 end
 
 
 function love.draw()
-    CM.attach()
+    gsm:draw()
 
-    drawGrid()
-    drawPlayers()
-    drawEnemies()
-    drawCollectibles()
-
-    CM.detach()
-    UI:draw()
 end
 
 

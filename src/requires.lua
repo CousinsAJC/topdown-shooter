@@ -13,3 +13,8 @@ require "src/bullet"
 require "src/enemy"
 require "src/ui"
 require "src/gold"
+
+require "src/states/stateMachine"
+require "src/states/baseState"
+require "src/states/playState"
+
