@@ -1,5 +1,5 @@
-WINWIDTH = 600
-WINHEIGHT = 400
+WINWIDTH = 1080
+WINHEIGHT = 720
 love.window.setMode(WINWIDTH, WINHEIGHT)
 require "src/requires"
 
@@ -31,7 +31,6 @@ end
 function love.update(dt)
     gsm:update(dt)
 
-
     myKeys = {}
 end
 
@@ -41,49 +40,6 @@ function love.draw()
 
 end
 
-
-
-
-function updatePlayers(dt)
-    for i = 1, #players, 1 do
-        players[i]:update(dt)
-    end
-end
-
-function updateEnemies(dt)
-    for i = #enemies, 1, -1 do
-        if enemies[i].dead == true then
-            table.remove(enemies, i)
-            return
-        end
-        enemies[i]:update(dt)
-    end
-end
-
-function updateCollectibles(dt)
-    for i = #collectibles, 1, -1 do
-        if collectibles[i].pickup == true then
-            p1.gold = p1.gold + 1
-            table.remove(collectibles, i)
-            return
-        end
-    end
-    
-    for i = #collectibles, 1, -1 do
-        collectibles[i]:update(dt)
-    end
-end
-
-
-function spawnEnemy(dt)
-    if spawnTimeLeft <= 0 then
-        local enemy = Enemy(math.random(500), math.random(300), 'goblin')
-        table.insert(enemies, enemy)
-        spawnTimeLeft = spawnTimer
-    else
-        spawnTimeLeft = spawnTimeLeft - dt
-    end
-end
 
 
 function setGameTables()
@@ -119,20 +75,3 @@ function drawGrid()
     end
 end
 
-function drawPlayers()
-    for i = 1, #players, 1 do
-        players[i]:draw()
-    end
-end
-
-function drawEnemies()
-    for i = #enemies, 1, -1 do
-        enemies[i]:draw()
-    end
-end
-
-function drawCollectibles()
-    for i = #collectibles, 1, -1 do
-        collectibles[i]:draw()
-    end
-end

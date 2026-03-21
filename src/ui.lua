@@ -18,13 +18,11 @@ end
 
 
 function UserInterface:update(dt)
-    self:getPlayerHealth(p1.health)
-    self:getBoostCooldown(p1.timeUntilBoost)
+    self:getPlayerHealth(p1.currentHp)
 end
 
 function UserInterface:draw()
     self:drawHealthBars()
-    self:drawCoolDowns()
     self:drawGoldCount()
 end
 
@@ -51,12 +49,6 @@ function UserInterface:drawHealthBars()
     end
 end
 
-function UserInterface:drawCoolDowns()
-    love.graphics.setColor(self.cooldownColor)
-    love.graphics.setNewFont(24)
-    local number = string.format("%.2f", self.boostTimer)
-    love.graphics.print(number, self.cooldownX, self.cooldownY)
-end
 
 function UserInterface:drawGoldCount()
     love.graphics.setColor(self.goldColor)

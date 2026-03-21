@@ -1,13 +1,25 @@
 p_type = {
     ['ranger'] = {
-        str = 8,
-        dex = 8,
-        con = 8,
-        int = 8,
-        wis = 8,
-        cha = 8,
+        startingWeapon = item_type['bow'],
+        
+        maxHp = 10,
+        hpRegen = 0,
+        lifeSteal = 0,
+        damage = 1,
+        meleeDamage = 0,
+        rangedDamage = 0,
+        magicDamage = 0,
+        attackSpeed = 0,
+        critChance = 0,
+        critDamage = 1.5,
+        range = 10,
+        armor = 0,
+        dodge = 0,
+        speed = 3,
+        luck = 0,
+        harvesting = 0,
 
-        health = 10,
+        --animations to be fixed at later date.
         texture = 'ranger',
         animations = {
             ['idle'] = {
@@ -19,19 +31,29 @@ p_type = {
                 interval = 0.2
             }
         },
-        weapon = 'bow'
     },
 
 
     ['sorceror'] = {
-        str = 8,
-        dex = 8,
-        con = 8,
-        int = 8,
-        wis = 8,
-        cha = 8,
+        startingWeapon = 'wand',
 
-        health = 8,
+        maxHp = 10,
+        hpRegen = 0,
+        lifeSteal = 0,
+        damage = 1,
+        meleeDamage = 0,
+        rangedDamage = 0,
+        magicDamage = 0,
+        attackSpeed = 0,
+        critChance = 0,
+        critDamage = 1.5,
+        range = 10,
+        armor = 0,
+        dodge = 0,
+        speed = 2,
+        luck = 0,
+        harvesting = 0,
+
         texture = 'sorceror',
         animations = {
             ['idle'] = {
@@ -43,19 +65,28 @@ p_type = {
                 interval = 0.2
             }
         },
-        weapon = 'wand'
     },
 
+    ['berserker'] = {
+        startingWeapon = 'great-club',
+        
+        maxHp = 10,
+        hpRegen = 0,
+        lifeSteal = 0,
+        damage = 0,
+        meleeDamage = 0,
+        rangedDamage = 0,
+        magicDamage = 0,
+        attackSpeed = 0,
+        critChance = 0,
+        critDamage = 1.25,
+        range = 10,
+        armor = 0,
+        dodge = 0,
+        speed = 2,
+        luck = 0,
+        harvesting = 0,
 
-    ['soldier'] = {
-        str = 8,
-        dex = 8,
-        con = 8,
-        int = 8,
-        wis = 8,
-        cha = 8,
-
-        health = 12,
         texture = 'soldier',
         animations = {
             ['idle'] = {
@@ -67,8 +98,7 @@ p_type = {
                 interval = 0.2
             }
         },
-        weapon = 'spear'
-    }
+    },
 }
 
 

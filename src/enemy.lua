@@ -1,10 +1,10 @@
 Enemy = Object:extend()
 
-function Enemy:new(x, y, enemyType)
+function Enemy:new(x, y, enemyType, id)
+    self.id = id
     self.x = x
     self.y = y
-    self.xWorld = self.x
-    self.yWorld = self.y
+
     self.r = 15
     self.health = 5
     self.dead = false
@@ -25,12 +25,8 @@ end
 
 function Enemy:update(dt)
     --print("enemy X: " .. self.x .. " || enemy Y: " .. self.y)
-
-    self:checkForBullets(dt)
     --for each target:get distance (table of players?)
-    self.xWorld, self.yWorld = CM.toWorldCoords(self.x, self.y)
-    local distance = getDistance(self.xWorld, self.yWorld, p1.xWorld, p1.yWorld)
-    --print(distance)
+    local distance = getDistance(self.x, self.y, p1.x, p1.y)
     self:chase(dt, distance)
     self:followTarget(dt, distance)
 end
@@ -44,21 +40,14 @@ end
 
 
 
-
-function Enemy:checkForBullets(dt)
-    local bullets = p1.bullets
-    for i = #bullets, 1, -1 do
-        local distance = getDistance(self.xWorld, self.yWorld, bullets[i].x, bullets[i].y)
-        if distance <= (self.r + bullets[i].r) then
-            table.remove(p1.bullets, i)
-            self.health = self.health - 1
-            if self.health <= 0 then
-                self:dropGold()
-                self.dead = true
-            end
-        end
+function Enemy:takeHit()
+    self.health = self.health - 1
+    if self.health <= 0 then
+        self:dropGold()
+        self.dead = true
     end
 end
+
 
 
 function Enemy:dropGold()
@@ -108,7 +97,7 @@ end
 
 function Enemy:followTarget(dt)
     if self.follow == true then
-        local angle = getAngle(p1.yWorld, self.yWorld, p1.xWorld, self.xWorld)
+        local angle = getAngle(p1.y, self.y, p1.x, self.x)
         dx = math.cos(angle)
         dy = math.sin(angle)
         self.x = self.x + dx * self.speed * dt
