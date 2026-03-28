@@ -13,8 +13,8 @@ function PlayState:enter(enterParams)
 end
 
 function PlayState:update(dt)
-    updatePlayers(dt)
     updateEnemies(dt)
+    updatePlayers(dt)
     updateCollectibles(dt)
 
     spawnEnemy(dt)
@@ -59,10 +59,11 @@ end
 
 function updateEnemies(dt)
     for i = #enemies, 1, -1 do
-        enemies[i]:update(dt)
         if enemies[i].dead == true then
             table.remove(enemies, i)
+            return
         end
+        enemies[i]:update(dt)
     end
 end
 

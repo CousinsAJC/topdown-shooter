@@ -124,10 +124,12 @@ function Weapon:updateBulletsFromTable(dt)
     for i = #self.bullets, 1, -1 do
         self.bullets[i]:update(dt)
         for j = #enemies, 1, -1 do
-            local distance = getDistance(self.bullets[i].x, self.bullets[i].y, enemies[j].x, enemies[j].y)
-            if distance <= (self.bullets[i].r + enemies[j].r) then
-                table.remove(self.bullets, i)
-                enemies[j]:takeHit()
+            if enemies[j] ~= nil then
+                local distance = getDistance(self.bullets[i].x, self.bullets[i].y, enemies[j].x, enemies[j].y)
+                if distance <= (self.bullets[i].r + enemies[j].r) then
+                    table.remove(self.bullets, i)
+                    enemies[j]:takeHit()
+                end
             end
         end
     end

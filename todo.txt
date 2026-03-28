@@ -1,0 +1,2 @@
+seperate player/enemy movement from collision
+seperate colission from table removal for bullets and enemies
