@@ -30,10 +30,6 @@ end
 
 function Player:update(dt)
     self:move(dt)
-
-    for i=1, #self.weapons, 1 do
-        self.weapons[i]:update(dt)
-    end
 end
 
 

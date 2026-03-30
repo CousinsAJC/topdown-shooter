@@ -13,9 +13,12 @@ function PlayState:enter(enterParams)
 end
 
 function PlayState:update(dt)
-    updateEnemies(dt)
-    updatePlayers(dt)
+    moveEnemies(dt)
+    movePlayers(dt)
     updateCollectibles(dt)
+
+    updateBullets(dt)
+    checkForDeadEnemies(dt)
 
     spawnEnemy(dt)
 
@@ -38,34 +41,21 @@ function PlayState:draw()
 end
 
 
-function spawnEnemy(dt)
-    if spawnTimeLeft <= 0 then
-        local enemy = Enemy(math.random(500), math.random(300), 'goblin', id)
-        table.insert(enemies, enemy)
-        spawnTimeLeft = spawnTimer
-        id = id + 1
-    else
-        spawnTimeLeft = spawnTimeLeft - dt
+
+
+function moveEnemies(dt)
+    for i = 1, #enemies, 1 do
+        enemies[i]:update(dt)
     end
 end
 
 
-
-function updatePlayers(dt)
+function movePlayers(dt)
     for i = 1, #players, 1 do
         players[i]:update(dt)
     end
 end
 
-function updateEnemies(dt)
-    for i = #enemies, 1, -1 do
-        if enemies[i].dead == true then
-            table.remove(enemies, i)
-            return
-        end
-        enemies[i]:update(dt)
-    end
-end
 
 function updateCollectibles(dt)
     for i = #collectibles, 1, -1 do
@@ -80,6 +70,41 @@ function updateCollectibles(dt)
         collectibles[i]:update(dt)
     end
 end
+
+
+function updateBullets(dt)
+    for i = 1, #players, 1 do
+        for j = 1, #players[i].weapons, 1 do 
+            players[i].weapons[j]:update(dt)
+        end
+    end
+end
+
+
+
+function checkForDeadEnemies(dt)
+    for i = #enemies, 1, -1 do
+        if enemies[i].dead == true then
+            table.remove(enemies, i)
+        end
+    end
+end
+
+
+function spawnEnemy(dt)
+    if spawnTimeLeft <= 0 then
+        local enemy = Enemy(math.random(500), math.random(300), 'goblin', id)
+        table.insert(enemies, enemy)
+        spawnTimeLeft = spawnTimer
+        id = id + 1
+    else
+        spawnTimeLeft = spawnTimeLeft - dt
+    end
+end
+
+
+
+
 
 
 

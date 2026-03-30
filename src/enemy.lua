@@ -6,7 +6,7 @@ function Enemy:new(x, y, enemyType, id)
     self.y = y
 
     self.r = 15
-    self.health = 5
+    self.health = 2
     self.dead = false
 
     self.minFollow = 150

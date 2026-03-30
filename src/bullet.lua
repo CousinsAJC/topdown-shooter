@@ -40,7 +40,6 @@ end
 function Bullet:move(dt)
     self.x = self.x + self.dx * self.speed * dt
     self.y = self.y + self.dy * self.speed * dt
-    print(self.x, self.y)
 end
 
 
